@@ -102,11 +102,12 @@ class Player(Pessoa):
     def batalhar(self,pessoa):
         print("{} iniciou uma batalha com {}".format(self,pessoa))
         
-        self.mostrar_pokemons()
-        self.escolher_pokemon()
+        pessoa.mostrar_pokemons()
+        pokemon_inimigo = pessoa.escolher_pokemon()
 
+        pokemon = self.escolher_pokemon()
 
-        if pokemon and Pokemon_inimigo:
+        if pokemon and pokemon_inimigo:
             while True:
                 vitoria = pokemon.atacar(pokemon_inimigo)
                 if vitoria:
