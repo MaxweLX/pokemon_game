@@ -13,8 +13,7 @@ class Pokemon:
         if nome:
             self.nome = nome
         else:
-            self.nome = especie
-        
+            self.nome = especie       
         self.ataque = self.level * 5
         self.vida = self.level * 10
 
@@ -24,7 +23,6 @@ class Pokemon:
     def atacar(self, pokemon):
         ataque_efetivo = int((self.ataque * random.random()* 1.3))
         pokemon.vida -= ataque_efetivo
-        
         print("{} perdeu {} pontos de vida ".format(pokemon, ataque_efetivo))
 
         if pokemon.vida <= 0:
@@ -34,24 +32,24 @@ class Pokemon:
             return False
 
 class PokemonEletrico(Pokemon):
-    tipo = 'eletrico'
+    tipo = 'Eletrico'
 
-    def atacar(self, Pokemon):
-        print("{} lançou um raio do trovão em {}".format(self, Pokemon))
-        return super().atacar(Pokemon)
+    def atacar(self, pokemon):
+        print("{} lançou um raio do trovão em {}".format(self, pokemon))
+        return super().atacar(pokemon)
 
 
 class PokemonFogo(Pokemon):
     tipo = 'Fogo'
 
-    def atacar(self, Pokemon):
-        print("{} lançou uma bola de fogo em {}".format(self, Pokemon))
-        return super().atacar(Pokemon)
+    def atacar(self, pokemon):
+        print("{} lançou uma bola de fogo em {}".format(self, pokemon))
+        return super().atacar(pokemon)
 
 
 class PokemonAgua(Pokemon):
     tipo = 'Agua'
 
-    def atacar(self, Pokemon):
-        print("{} lançou um jato d'água em {}".format(self, Pokemon))
-        return super().atacar(Pokemon)
+    def atacar(self, pokemon):
+        print("{} lançou um jato d'água em {}".format(self, pokemon))
+        return super().atacar(pokemon)
