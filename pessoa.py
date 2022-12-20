@@ -1,4 +1,4 @@
-import random
+import random 
 
 from pokemon import *
 
@@ -13,7 +13,6 @@ POKEMONS = [
     PokemonAgua("Squirtle"),
     PokemonAgua("Magicarp") 
 ]
-
 
 class Pessoa:
 
@@ -51,7 +50,7 @@ class Pessoa:
 
     def ganhar_dinheiro(self, quantidade):
         self.dinheiro += quantidade
-        print("Você ganhou ${}".format(quantidade))
+        print("Você ganhou $ {} ".format(quantidade))
         self.mostrar_dinheiro()
 
     def batalhar(self,pessoa):
@@ -64,14 +63,17 @@ class Pessoa:
         
         if pokemon and pokemon_inimigo:
             while True:
-               vitoria = pokemon.atacar(pokemon_inimigo)
-               if vitoria:
-                print("{} ganhou a batalha".format(self))
-                break
+                vitoria = pokemon.atacar(pokemon_inimigo)
+                if vitoria:
+                    print("{} cocê ganhou essa batalha".format(self))
+                    self.ganhar_dinheiro(pokemon_inimigo.level * 100)
+                    print("Você ganhou {} ".format(self.dinheiro))
+                    break
                 
-               vitoria_inimiga = pokemon_inimigo.atacar(pokemon)
-        else:
-            print("Essa batalha não pode ocorrer !")
+                vitoria_inimiga = pokemon_inimigo.atacar(pokemon)
+                if vitoria_inimiga:
+                    print("{} ganhou essa batalha".format(pessoa))
+                    break
 
 class Player(Pessoa):
     tipo = "player"
@@ -94,33 +96,49 @@ class Player(Pessoa):
                 except:
                     print("escolha invalida")
         else:
-            print("esse jogador não possui nenhum pokemon para ser escolhido")
+            print("esse jogador não possui nenhum pokemon para ser escolhido")  
 
-        
-                
 
     def batalhar(self,pessoa):
         print("{} iniciou uma batalha com {}".format(self,pessoa))
         
         pessoa.mostrar_pokemons()
         pokemon_inimigo = pessoa.escolher_pokemon()
-
         pokemon = self.escolher_pokemon()
 
         if pokemon and pokemon_inimigo:
             while True:
                 vitoria = pokemon.atacar(pokemon_inimigo)
                 if vitoria:
-                    print("você gnahou!")
+                    print("{} você ganhou essa batalha".format(self))
+                    self.ganhar_dinheiro(pokemon_inimigo.level * 100)
                     break
-                
                 vitoria_inimiga = pokemon_inimigo.atacar(pokemon)
                 if vitoria_inimiga:
-                    print("você perdeu")
+                    print("{} ganhou essa batalha".format(pessoa))
                     break
 
         else:
             print("Essa batalha não pode ocorrer !!")
+
+    def explorar(self):
+        if random.random() <= 0.3:
+            pokemon = random.choice(POKEMONS)
+            print("Um pokemon selvagem apareceu: {}".format(pokemon))
+            
+
+            escolha = input("Deseja capturar esse pokemon ? s/n: ")
+            if escolha == 's':
+                if random.random() >= 0.5:
+                    self.capturar(pokemon)
+                else:
+                    print("Que pena, o {} fugiu".format(pokemon))
+            else:
+                print("Ok, boa viagem! ")
+
+        else:
+            print("Essa exploração não deu em nada")
+
 
 class Inimigo(Pessoa):
     tipo = "inimigo"
